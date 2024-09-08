@@ -1,16 +1,6 @@
 const fs = require('fs');
 
-// Read
 
-fs.readFile('./docs/blog12.txt', (err, data) => {
-    if (err) {
-        console.error(err);
-    
-    }
-    console.log(data.toString());
-});
-
-console.log('last line');
 
 // Write
 
