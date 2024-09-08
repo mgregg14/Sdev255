@@ -1,44 +1,47 @@
 const fs = require('fs');
 
-// Write
+// reading files
+fs.readFile('./docs/blog.txt', (err, data) => {
+  if (err) {
+    console.log(err);
+  }  
+  console.log(data.toString());
+});
 
-//fs.writeFile('./doc/blog1.txt', 'Hello, World', () =>{
-//    console.log('file was written');
-//})
+// console.log('last line');
 
-//fs.writeFile('./doc/blog2.txt', 'Hello, Again', () =>{
-//    console.log('file was written');
-//})
+// writing 
+fs.writeFile('./docs/blog.txt', 'hello, world', () => {
+  console.log('file was written');
+});
 
-//directories
-if (fs.existsSync('./assets')) {
-    fs.rmdir('./assets', (err) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log('Folder deleted');
-    });
+fs.writeFile('./docs/blog2.txt', 'hello, again', () => {
+  console.log('file was written');
+});
+
+// directories
+if (!fs.existsSync('./assets')) {
+  fs.mkdir('./assets', err => {
+    if (err) {
+      console.log(err);
+    }
+    console.log('folder created');
+  });
 } else {
-    fs.mkdir('./assets', (err) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log('Folder created');
-    });
+  fs.rmdir('./assets', err => {
+    if (err) {
+      console.log(err);
+    }
+    console.log('folder deleted');
+  });
 }
 
-
-//delete
-
-if(fs.existsSync('./docs/deleteme.txt')){
-    fs.unlink('./docs/deleteme.txt', (err) =>{
-        if (err){
-            console.log(err)
-
-        }
+// deleting 
+if (fs.existsSync('./docs/deleteme.txt')) {
+  fs.unlink('./docs/deleteme.txt', err => {
+    if (err) {
+      console.log(err);
+    }
     console.log('file deleted');
-    
-    })
+  });
 }
