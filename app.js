@@ -21,13 +21,6 @@ app.use((req, res, next) => {
     console.log('in the next middleware');
     next();
   });
-  
-
-
-
-// register view engine
-app.set('view engine', 'ejs');
-// app.set('views', 'myviews');
 
 app.get('/', (req, res) => {
   const blogs = [
