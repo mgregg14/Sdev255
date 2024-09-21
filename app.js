@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 
 // express app
 const app = express();
@@ -6,7 +7,10 @@ const app = express();
 // listen for requests
 app.listen(3000);
 
+// register view engine
+app.set('view engine', 'ejs');
 
+// middleware & static files
 app.use(express.static('public'));
 
 app.use((req, res, next) => {
@@ -18,9 +22,16 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    console.log('in the next middleware');
-    next();
-  });
+  console.log('in the next middleware');
+  next();
+});
+
+app.use(morgan('dev'));
+
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
+});
 
 app.get('/', (req, res) => {
   const blogs = [
